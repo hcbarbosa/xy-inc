@@ -24,21 +24,31 @@ public class PontoInteresseService {
     private PontoInteresseRepository pontoInteresseRepository;
 
     /**
-     * {@inheritDoc}
+     * Consulta que retorna todos os pontos de interesse do banco
+     * 
+     * @return lista de pois
      */
     public List<PontoInteresse> findAll() {
         return pontoInteresseRepository.findAll();
     }
 
     /**
-     * {@inheritDoc}
+     * Consulta que retorna todos os pontos de interesse dentro da distância
+     * especificada a partir do ponto parametrizado
+     * 
+     * @param x coordenada x do ponto de interesse escolhido
+     * @param y coordenada y do ponto de interesse escolhido
+     * @param distance distancia do ponto escolhido
+     * @return lista de pois filtrada
      */
     public List<PontoInteresse> findNearbyPoi(Integer x, Integer y, Integer distance) {
         return pontoInteresseRepository.findNearbyPoi(x, y, distance);
     }
 
     /**
-     * {@inheritDoc}
+     * Cria ponto de interesse no banco
+     * 
+     * @return entidade persistida
      */
     @Transactional(readOnly = false)
     public PontoInteresse save(PontoInteresse entity) {
@@ -55,14 +65,12 @@ public class PontoInteresseService {
      * @param entity: objeto que será validado.
      */
     private void validateEntity(PontoInteresse entity) {
-        if (pontoInteresseRepository.verificarExistenciaPoi(entity.getX(), entity.getY()) != null) {
-            throw new RuntimeException();
-        } else if (entity.getNome() == null) {
-            throw new IllegalArgumentException ("Nome inválido");
-        } else if (entity.getX() <= 0) {
-            throw new IllegalArgumentException ("Coordenada X menor ou igual a 0");
-        } else if (entity.getY() <= 0) {
-            throw new IllegalArgumentException ("Coordenada Y menor ou igual a 0");
+        if (entity.getNome() == null) {
+            throw new IllegalArgumentException("Nome inválido");
+        } else if (entity.getX() < 0) {
+            throw new IllegalArgumentException("Coordenada X menor ou igual a 0");
+        } else if (entity.getY() < 0) {
+            throw new IllegalArgumentException("Coordenada Y menor ou igual a 0");
         }
     }
 }

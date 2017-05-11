@@ -1,0 +1,62 @@
+<html ng-app="poi">
+<head>
+	<title>XY Inc - Poi</title>
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css"/>
+	<meta charset="UTF-8" />
+	<style type="text/css">
+		.navbar{
+			width: 200px;
+			height : 100%;
+			text-align: center;
+			display: left;
+			background-color: #ebf2f4;
+		}
+		
+		h3{
+			color: #337ab7;
+		}
+		
+		.jumbotron{
+			display:rigth;
+			height: 100%;
+			background-color: black;
+		}
+
+		.form-control{
+			margin-top: 10px;
+		}
+	</style>
+
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/poi.js"></script>
+</head>
+<body ng-controller="poiCtrl">
+<div class="navbar">
+	<h3>{{app}}</h3>
+	<hr/>	
+	<button class="btn btn-primary btn-block" ng-click="">
+		Consultar Pois
+	</button>
+	<form name="consultarForm">
+		<input type="number" ng-model="x" class="form-control" placeholder="Coord. X:" ng-required="true" name="x"/>
+		<input type="number" ng-model="y" class="form-control" placeholder="Coord. Y:" ng-required="true" name="y"/>
+		<input type="number" ng-model="distance" class="form-control" placeholder="Distância:" ng-required="true" name="distance"/>
+		<br/>
+		<button class="btn btn-primary btn-block" ng-click="" ng-disabled="!(x && y && distance)">
+			Filtrar Pois
+		</button>
+	</form>
+	<form name="poiForm">
+		<input type="number" ng-model="poi.x" class="form-control" placeholder="Coord. X:" ng-required="true" name="poiX"/>
+		<input type="number" ng-model="poi.y" class="form-control" placeholder="Coord. Y:" ng-required="true" name="poiY"/>
+		<input type="text" ng-model="poi.nome" class="form-control" placeholder="Nome:" ng-required="true" name="poiNome"/>
+		<br/>
+		<button class="btn btn-primary btn-block" ng-click="" ng-disabled="!(poi.x && poi.y && poi.nome)">
+			Adicionar Poi
+		</button>
+	</form>
+</div>
+<div class="jumbotron">
+</div>
+</body>
+</html>

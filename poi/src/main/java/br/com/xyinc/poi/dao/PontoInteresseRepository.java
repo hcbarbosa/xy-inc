@@ -14,15 +14,15 @@ import org.springframework.stereotype.Repository;
 import br.com.xyinc.poi.entity.PontoInteresse;
 
 /**
- * Repositorio para {@link PontoInteresse}
+ * Repositório para {@link PontoInteresse}
  */
 @Repository
-public interface PontoInteresseRepository extends JpaRepository<PontoInteresse, Long>{
+public interface PontoInteresseRepository extends JpaRepository<PontoInteresse, Long> {
 
-//    @Query("{$geoWithin : { $centerSphere: [ [ x, y ], distance ] }}")
+    /**
+     * Consulta de pontos de interesse com base na proximidade
+     */
     @Query("SELECT p FROM PontoInteresse p WHERE (ABS(p.x - :pX) + ABS(p.y - :pY)) <= :distance")
-    public List<PontoInteresse> findNearbyPoi(@Param("pX") int x, @Param("pY") int y, @Param("distance") int distance);
-
-    @Query("SELECT p FROM PontoInteresse p WHERE p.x = :pX AND p.y = :pY")
-    public PontoInteresse verificarExistenciaPoi(@Param("pX") int x,@Param("pY") int y);
+    public List<PontoInteresse> findNearbyPoi(@Param("pX") Integer x, @Param("pY") Integer y,
+            @Param("distance") Integer distance);
 }

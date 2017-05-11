@@ -29,11 +29,6 @@ public class PontoInteresseController {
     @Autowired
     private PontoInteresseService pontoInteresseService;
 
-    @GetMapping(path = "/teste")
-    public ResponseEntity<String> teste() {
-        return new ResponseEntity<String>("Olá", HttpStatus.OK);
-    }
-
     /**
      * Método que retorna todos os pontos de interesse cadastrados
      * 
@@ -50,16 +45,15 @@ public class PontoInteresseController {
      * 
      * @param poi Entidade com os dados do ponto de interesse
      * @return entidade com os dados persistidos
+     * @throws IllegalArgumentException
      */
     @PostMapping
-    public ResponseEntity<PontoInteresse> save(@RequestBody PontoInteresse poi) {
+    public ResponseEntity<?> save(@RequestBody PontoInteresse poi) {
         try {
             pontoInteresseService.save(poi);
-            return new ResponseEntity<>(poi, HttpStatus.CREATED);
+            return new ResponseEntity<PontoInteresse>(poi, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        } catch (RuntimeException e) {
-            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<Object>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
@@ -76,6 +70,6 @@ public class PontoInteresseController {
             @PathVariable("distance") int distance) {
         List<PontoInteresse> poiList = pontoInteresseService.findNearbyPoi(x, y, distance);
 
-        return new ResponseEntity<>(poiList, HttpStatus.OK);
+        return new ResponseEntity<List<PontoInteresse>>(poiList, HttpStatus.OK);
     }
 }

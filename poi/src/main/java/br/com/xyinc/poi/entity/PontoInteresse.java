@@ -7,29 +7,27 @@
  */
 package br.com.xyinc.poi.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.persistence.Id;
 
-import org.springframework.data.annotation.Id;
-
+/**
+ * Entidade
+ */
 @Entity
-@Table(name = "Pois")
+@Table(name = "ponto_interesse")
 public class PontoInteresse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
     private int x;
 
-    @Column(nullable = false)
     private int y;
 
     public String getNome() {
