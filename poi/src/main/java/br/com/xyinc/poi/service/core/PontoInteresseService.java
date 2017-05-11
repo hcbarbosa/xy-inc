@@ -2,7 +2,7 @@
  * Esse arquivo pertence a XY Inc e nao pode ser utilizado fora
  * dessa empresa sem previa autorizacao.
  */
-package br.com.xyinc.poi.service;
+package br.com.xyinc.poi.service.core;
 
 import java.util.List;
 
@@ -12,44 +12,38 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.xyinc.poi.dao.PontoInteresseRepository;
 import br.com.xyinc.poi.entity.PontoInteresse;
+import br.com.xyinc.poi.service.IPontoInteresseService;
 
 /**
  * Implementação de Serviço para {@link PontoInteresse}
  */
 @Service
 @Transactional(readOnly = true)
-public class PontoInteresseService {
+public class PontoInteresseService implements IPontoInteresseService {
 
     @Autowired
     private PontoInteresseRepository pontoInteresseRepository;
 
     /**
-     * Consulta que retorna todos os pontos de interesse do banco
-     * 
-     * @return lista de pois
+     * {@inheritDoc}
      */
+    @Override
     public List<PontoInteresse> findAll() {
         return pontoInteresseRepository.findAll();
     }
 
     /**
-     * Consulta que retorna todos os pontos de interesse dentro da distância
-     * especificada a partir do ponto parametrizado
-     * 
-     * @param x coordenada x do ponto de interesse escolhido
-     * @param y coordenada y do ponto de interesse escolhido
-     * @param distance distancia do ponto escolhido
-     * @return lista de pois filtrada
+     * {@inheritDoc}
      */
+    @Override
     public List<PontoInteresse> findNearbyPoi(Integer x, Integer y, Integer distance) {
         return pontoInteresseRepository.findNearbyPoi(x, y, distance);
     }
 
     /**
-     * Cria ponto de interesse no banco
-     * 
-     * @return entidade persistida
+     * {@inheritDoc}
      */
+    @Override
     @Transactional(readOnly = false)
     public PontoInteresse save(PontoInteresse entity) {
         validateEntity(entity);

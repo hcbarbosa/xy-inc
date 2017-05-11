@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.xyinc.poi.entity.PontoInteresse;
-import br.com.xyinc.poi.service.PontoInteresseService;
+import br.com.xyinc.poi.service.IPontoInteresseService;
 
 /**
  * Controlador de requisições para {@link PontoInteresse}
@@ -27,7 +27,7 @@ import br.com.xyinc.poi.service.PontoInteresseService;
 public class PontoInteresseController {
 
     @Autowired
-    private PontoInteresseService pontoInteresseService;
+    private IPontoInteresseService pontoInteresseService;
 
     /**
      * Método que retorna todos os pontos de interesse cadastrados
