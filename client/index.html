@@ -1,62 +1,58 @@
-<html ng-app="poi">
+<html ng-app="pontoInteresseApp">
 <head>
 	<title>XY Inc - Poi</title>
-	<link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+	<link rel="stylesheet" type="text/css" href="css/app.css"/>
 	<meta charset="UTF-8" />
-	<style type="text/css">
-		.navbar{
-			width: 200px;
-			height : 100%;
-			text-align: center;
-			display: left;
-			background-color: #ebf2f4;
-		}
-		
-		h3{
-			color: #337ab7;
-		}
-		
-		.jumbotron{
-			display:rigth;
-			height: 100%;
-			background-color: black;
-		}
-
-		.form-control{
-			margin-top: 10px;
-		}
-	</style>
-
-	<script src="lib/angular/angular.js"></script>
-	<script src="lib/angular/poi.js"></script>
+	<script src="lib/angular.js"></script>
+	<script src="lib/angular-resource.min.js"></script>
+	<script src="lib/angular-ui-router.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/services.js"></script>
 </head>
-<body ng-controller="poiCtrl">
-<div class="navbar">
-	<h3>{{app}}</h3>
-	<hr/>	
-	<button class="btn btn-primary btn-block" ng-click="">
-		Consultar Pois
-	</button>
-	<form name="consultarForm">
-		<input type="number" ng-model="x" class="form-control" placeholder="Coord. X:" ng-required="true" name="x"/>
-		<input type="number" ng-model="y" class="form-control" placeholder="Coord. Y:" ng-required="true" name="y"/>
-		<input type="number" ng-model="distance" class="form-control" placeholder="Distância:" ng-required="true" name="distance"/>
-		<br/>
-		<button class="btn btn-primary btn-block" ng-click="" ng-disabled="!(x && y && distance)">
-			Filtrar Pois
+<body ng-controller="PontoInteresseController">
+<div class="conteudo">
+	<div class="navbar">
+		<h3>{{APP_TITLE}}</h3>
+		<hr/>	
+		<button class="btn btn-primary btn-block" ng-click="consultaPois()">
+			Consultar Pois
 		</button>
-	</form>
-	<form name="poiForm">
-		<input type="number" ng-model="poi.x" class="form-control" placeholder="Coord. X:" ng-required="true" name="poiX"/>
-		<input type="number" ng-model="poi.y" class="form-control" placeholder="Coord. Y:" ng-required="true" name="poiY"/>
-		<input type="text" ng-model="poi.nome" class="form-control" placeholder="Nome:" ng-required="true" name="poiNome"/>
-		<br/>
-		<button class="btn btn-primary btn-block" ng-click="" ng-disabled="!(poi.x && poi.y && poi.nome)">
-			Adicionar Poi
-		</button>
-	</form>
-</div>
-<div class="jumbotron">
+		<form name="consultarForm">
+			<input type="number" ng-model="x" class="form-control" placeholder="Coord. X:" ng-required="true" name="x"/>
+			<input type="number" ng-model="y" class="form-control" placeholder="Coord. Y:" ng-required="true" name="y"/>
+			<input type="number" ng-model="distance" class="form-control" placeholder="Distância:" ng-required="true" name="distance"/>
+			<br/>
+			<button class="btn btn-primary btn-block" ng-click="filtraPois()" ng-disabled="!(x && y && distance)">
+				Filtrar Pois
+			</button>
+		</form>
+		<form name="poiForm">
+			<input type="number" ng-model="poi.x" class="form-control" placeholder="Coord. X:" ng-required="true" name="poiX"/>
+			<input type="number" ng-model="poi.y" class="form-control" placeholder="Coord. Y:" ng-required="true" name="poiY"/>
+			<input type="text" ng-model="poi.nome" class="form-control" placeholder="Nome:" ng-required="true" name="poiNome"/>
+			<br/>
+			<button class="btn btn-primary btn-block" ng-click="addPoi()" ng-disabled="!(poi.x && poi.y && poi.nome)">
+				Adicionar Poi
+			</button>
+		</form>
+	</div>
+	
+	<div class="jumbotron">
+		<table class="table table-bordered pois" ng-show="pois.length > 0">
+		<tr>
+			<th><a href="" ng-click="ordenarPor('nome')">Nome</th>
+			<th><a href="" ng-click="ordenarPor('x')">X</th>
+			<th><a href="" ng-click="ordenarPor('y')">Y</th>
+		</tr>
+		<tr ng-repeat="poi in pois | orderBy: chaveOrdenacao:false">
+			<td>{{poi.nome}}</td>
+			<td>{{poi.x}}</td>
+			<td>{{poi.y}}</td>
+		</tr>
+	</table>
+	</div>
 </div>
 </body>
 </html>

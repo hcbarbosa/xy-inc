@@ -1,0 +1,17 @@
+angular
+    .module('pontoInteresseApp')
+    .factory('httpInterceptorService', httpInterceptorService);
+
+ function httpInterceptorService(toaster) {
+   return {
+    requestError: requestError,
+    responseError: responseError
+  };
+
+function requestError(rejection) {
+    toaster.pop('error', "Erro requisicao api rest ", rejection.status + ': ' + rejection.statusText);       
+}
+
+function responseError(response) {
+    toaster.pop('error', '', "Erro response api rest ");
+}

@@ -1,0 +1,30 @@
+.navbar{
+	width: 200px;
+	height : 100%;
+	text-align: center;
+	float: left;
+	background-color: #c1d7e9;
+}
+
+.conteudo {
+	margin-bottom: 0px;
+}
+	
+h3{
+	color: #337ab7;
+}
+
+.jumbotron{
+	height: 100%;
+	background-color: #ffffff;
+}
+
+.form-control{
+	margin-top: 10px;
+}
+
+.pois {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
