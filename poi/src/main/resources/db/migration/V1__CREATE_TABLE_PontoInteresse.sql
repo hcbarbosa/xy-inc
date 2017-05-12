@@ -18,6 +18,8 @@ insert into ponto_interesse (nome, x, y) values ('Pub', 12, 8);
 insert into ponto_interesse (nome, x, y) values ('Supermercado', 23, 6);
 insert into ponto_interesse (nome, x, y) values ('Churrascaria', 28, 2);
 
+commit;
+
 #select * from ponto_interesse;
 
 #drop table ponto_interesse;
